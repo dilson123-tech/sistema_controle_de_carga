@@ -13,8 +13,15 @@ class CargaRepository:
         if not os.path.exists(self.caminho_banco):
             return []
         with open(self.caminho_banco, 'r') as f:
-            dados = json.load(f)
-            return [CargaModel(**item) for item in dados]
+            conteudo = f.read().strip()
+            if not conteudo:
+                return []
+            try:
+                dados = json.loads(conteudo)
+                return [CargaModel(**item) for item in dados]
+            except json.JSONDecodeError:
+                print("Erro: arquivo JSON corrompido. Iniciando com lista vazia.")
+                return []
 
     def salvar(self):
         try:
@@ -37,3 +44,10 @@ class CargaRepository:
                 raise ValueError("Essa carga já está cadastrada.")
         self.cargas.append(nova_carga)
         self.salvar()
+
+    def remover(self, indice):
+        if 0 <= indice < len(self.cargas):
+            del self.cargas[indice]
+            self.salvar()
+        else:
+            raise IndexError("Índice fora do intervalo.")

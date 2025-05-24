@@ -1,21 +1,23 @@
 from controllers.carga_controller import CargaController
 
 def main():
-    controlador = CargaController()
+    controller = CargaController()
     print("Bem-vindo ao Sistema de Controle de Carga")
 
     while True:
-        acao = input("Digite uma ação (listar, adicionar, sair): ").strip().lower()
+        acao = input("Digite uma ação (listar, adicionar, deletar, sair): ").strip().lower()
 
-        if acao == 'listar':
-            controlador.listar_cargas()
-        elif acao == 'adicionar':
-            controlador.adicionar_carga()
-        elif acao == 'sair':
-            print("Saindo...")
+        if acao == "listar":
+            controller.listar_cargas()
+        elif acao == "adicionar":
+            controller.adicionar_carga()
+        elif acao == "deletar":
+            controller.deletar_carga()
+        elif acao == "sair":
+            print("Saindo do sistema. Até logo!")
             break
         else:
-            print("Ação inválida, tenta de novo.")
+            print("Ação inválida. Tente novamente.")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
