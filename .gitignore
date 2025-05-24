@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.env
+data/banco_de_dados_backup_*.json
